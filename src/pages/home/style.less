@@ -1,0 +1,59 @@
+.wrapper {
+  width: 100%;
+  height: 2000px;
+  background-color: #fff;
+  overflow-x: hidden;
+
+  .homeHeader {
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    .searchWrapper {
+      position: relative;
+      padding: 20px 24px 14px;
+  
+      .searchIcon {
+        position: absolute;
+        top: 33px;
+        left: 44px;
+        width: 40px;
+      }
+  
+      .searchInput {
+        display: block;
+        width: 100%;
+        height: 64px;
+        text-indent: 80px;
+        font-size: 28px;
+        border: none;
+        outline: none;
+        border-radius: 6px;
+        background-color: #e6e6e6;
+      }
+    }
+  
+    .tabWrapper {
+      display: flex;
+      position: relative;
+      height: 58px;
+      line-height: 58px;
+      padding-bottom: 4px;
+      box-shadow: 0 2px 2px #e7e7e7;
+  
+      .tabItem {
+        flex: 1;
+        color: #858585;
+        text-align: center;
+      }
+
+      .line {
+        position: absolute;
+        bottom: 0px;
+        width: 44px;
+        border-bottom: 4px solid #575757;
+        transition: 0.2s all;
+      }
+    }
+  }
+}

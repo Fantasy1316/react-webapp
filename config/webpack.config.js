@@ -28,6 +28,14 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
 
+//vw适配
+const postcssAspectRatioMini = require('postcss-aspect-ratio-mini');
+const postcssPxToViewport = require('postcss-px-to-viewport');
+const postcssWriteSvg = require('postcss-write-svg');
+const postcssCssnext = require('postcss-cssnext');
+const postcssViewportUnits = require('postcss-viewport-units');
+const cssnano = require('cssnano');
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -42,6 +50,8 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -96,6 +106,27 @@ module.exports = function(webpackEnv) {
                 flexbox: 'no-2009',
               },
               stage: 3,
+            }),
+            //vw config
+            postcssAspectRatioMini({}),
+            postcssPxToViewport({ 
+              viewportWidth: 750, // (Number) The width of the viewport. 
+              viewportHeight: 1334, // (Number) The height of the viewport. 
+              unitPrecision: 3, // (Number) The decimal numbers to allow the REM units to grow to. 
+              viewportUnit: 'vw', // (String) Expected units. 
+              selectorBlackList: ['.ignore', '.hairlines'], // (Array) The selectors to ignore and leave as px. 
+              minPixelValue: 1, // (Number) Set the minimum pixel value to replace. 
+              mediaQuery: false // (Boolean) Allow px to be converted in media queries. 
+            }),
+            postcssWriteSvg({
+              utf8: false
+            }),
+            postcssCssnext({}),
+            postcssViewportUnits({}),
+            cssnano({
+              preset: "advanced", 
+              autoprefixer: false, 
+              "postcss-zindex": false 
             }),
             // Adds PostCSS Normalize as the reset css with default options,
             // so that it honors browserslist config in package.json
@@ -400,6 +431,7 @@ module.exports = function(webpackEnv) {
               exclude: cssModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 1,
+                modules: true,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
               }),
               // Don't consider CSS imports dead code even if the
@@ -450,6 +482,33 @@ module.exports = function(webpackEnv) {
                   getLocalIdent: getCSSModuleLocalIdent,
                 },
                 'sass-loader'
+              ),
+            },
+
+            //less config
+            //own config
+            {
+              test: lessRegex,
+              exclude: sassModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  modules: true,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+              'less-loader'
+              )
+            },
+            {
+              test: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: true,
+                  getLocalIdent: getCSSModuleLocalIdent,
+                },
+              'less-loader'
               ),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
