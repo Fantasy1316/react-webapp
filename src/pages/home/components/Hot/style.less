@@ -1,0 +1,52 @@
+.wrapper {
+  padding: 0 24px;
+
+  .item {
+    display: flex;
+    padding: 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+
+    .itemSign {
+      font-size: 42px;
+      font-weight: 700;
+      color: #ff4c16ef;
+    }
+
+    .itemCont {
+      flex: 1;
+      padding: 0 14px;
+      overflow: hidden;
+
+      .title {
+        line-height: 42px;
+        font-size: 30px;
+        color: #222222;
+      }
+
+      .desc {
+        margin: 14px 0 18px;
+        line-height: 30px;
+        font-size: 26px;
+        color: #525252;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .hot {
+        font-size: 26px;
+        color: #777;
+      }
+    }
+
+    .itemImg {
+      display: flex;
+      align-items: center;
+      img {
+        width: 194px;
+        height: 130px;
+        border-radius: 6px;
+      }
+    }
+  }
+}

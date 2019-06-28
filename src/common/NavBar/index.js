@@ -49,15 +49,6 @@ class NavBar extends Component {
       </div>
     )
   }
-
-  componentDidMount() {
-    // setTimeout(() => {
-    //   this.setState(() => ({
-    //     show: false
-    //   }))
-    // }, 3000)
-    // console.log(this.props.tabShow);
-  }
 }
 
 const mapState = (state) => ({

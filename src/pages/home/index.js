@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Attention from "./components/Attention";
+import Recommend from "./components/Recommend";
+import Hot from "./components/Hot";
 import { actionCreators } from "./store";
 import { actionCreators as NavBarActionCreators } from "../../common/NavBar/store";
 import styles from "./style.less";
@@ -36,11 +39,30 @@ class Home extends Component {
               style={{ left: `${lineLeft}vw` }}></p>
           </div>
         </div>
+        <div className={styles.homeContent}>
+          {
+            tabIndex === 1 ? <Attention /> : null
+          }
+          {
+            tabIndex === 2 ? <Recommend /> : null
+          }
+          {
+            tabIndex === 3 ? <Hot /> :null
+          }
+        </div>
       </div>
     )
   }
 
   componentDidMount() {
+    this.bindEvent();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.props.handleScrollChange);
+  }
+
+  bindEvent() {
     let beforeScroll = document.documentElement.scrollTop;
     window.addEventListener("scroll", () => {
       let afterScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -50,7 +72,7 @@ class Home extends Component {
         this.props.handleScrollChange(true);
       }
       beforeScroll = afterScroll;
-    }, false)
+    }, false);
   }
 }
 

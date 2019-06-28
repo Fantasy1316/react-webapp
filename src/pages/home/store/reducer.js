@@ -3,7 +3,9 @@ import * as constants from "./constants";
 
 const defaultStore = fromJS({
   tabIndex: 1,
-  lineLeft: 13.467
+  lineLeft: 13.467,
+  hotList: [],
+  attentionList: []
 })
 
 export default (store = defaultStore, action) => {
@@ -13,6 +15,10 @@ export default (store = defaultStore, action) => {
         tabIndex: action.index,
         lineLeft: action.left
       });
+    case constants.GET_ATTENTION_DATA:
+      return store.set("attentionList", fromJS(action.list));
+    case constants.GET_HOT_DATA:
+      return store.set("hotList", fromJS(action.list));
     default:
       return store;
   }
