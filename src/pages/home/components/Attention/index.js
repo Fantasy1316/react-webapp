@@ -6,7 +6,6 @@ import styles from "./style.less";
 class Attention extends Component {
   render() {
     let { attentionList } = this.props;
-    console.log(attentionList);
     return (
       <div className={styles.wrapper}>
         {
@@ -91,9 +90,6 @@ class Attention extends Component {
 
   componentDidMount() {
     this.props.getAttentionData();
-    window.addEventListener("touchmove", function(e) {
-      console.log(this.ontouchend);
-    })
   }
 }
 

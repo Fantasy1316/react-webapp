@@ -73,6 +73,38 @@ class Home extends Component {
       }
       beforeScroll = afterScroll;
     }, false);
+
+    //监听滑动事件
+    let _this= this;
+    let moveStart, moveEnd;
+    window.addEventListener("touchstart", function(e) {
+      moveStart = e.changedTouches[0].clientX;
+    })
+    window.addEventListener("touchend", function(e) {
+      moveEnd = e.changedTouches[0].clientX;
+      if(moveEnd - moveStart >= 80) {
+        switch(_this.props.tabIndex) {
+          case 1:
+            break;
+          case 2:
+            _this.props.handleTabChange(1, 13.467);
+            break;
+          default: 
+            _this.props.handleTabChange(2, 46.933);
+        }
+      }else if(moveEnd - moveStart <= -80){
+        switch(_this.props.tabIndex) {
+          case 1:
+            _this.props.handleTabChange(2, 46.933);
+            break;
+          case 2:
+            _this.props.handleTabChange(3, 80.4);
+            break;
+          default: 
+            return;
+        }
+      }
+    }, false);
   }
 }
 
