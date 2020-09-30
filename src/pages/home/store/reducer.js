@@ -1,5 +1,5 @@
-import { fromJS } from "immutable";
-import * as constants from "./constants";
+import { fromJS } from 'immutable'
+import * as constants from './constants'
 
 const defaultStore = fromJS({
   tabIndex: 1,
@@ -9,17 +9,17 @@ const defaultStore = fromJS({
 })
 
 export default (store = defaultStore, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case constants.TAB_CHANGE:
       return store.merge({
         tabIndex: action.index,
         lineLeft: action.left
-      });
+      })
     case constants.GET_ATTENTION_DATA:
-      return store.set("attentionList", fromJS(action.list));
+      return store.set('attentionList', fromJS(action.list))
     case constants.GET_HOT_DATA:
-      return store.set("hotList", fromJS(action.list));
+      return store.set('hotList', fromJS(action.list))
     default:
-      return store;
+      return store
   }
 }

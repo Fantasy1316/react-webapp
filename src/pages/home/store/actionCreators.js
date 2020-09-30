@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios'
 // import { fromJS } from "immutable";
-import * as constants from "./constants";
+import * as constants from './constants'
 
 const tabChangeAction = (index, left) => ({
   type: constants.TAB_CHANGE,
@@ -20,24 +20,24 @@ const getAttentionAction = (data) => ({
 
 export const tabChange = (index, left) => {
   return (dispatch) => {
-    dispatch(tabChangeAction(index, left));
+    dispatch(tabChangeAction(index, left))
   }
 }
 
 export const getHotData = () => {
   return (dispatch) => {
-    axios.get('/mock/hot.json').then(res => {
-      let data = res.data.data;
-      dispatch(getHotAction(data));
+    axios.get('/mock/hot.json').then((res) => {
+      let data = res.data.data
+      dispatch(getHotAction(data))
     })
   }
 }
 
 export const getAttentionData = () => {
   return (dispatch) => {
-    axios.get('/mock/attention.json').then(res => {
-      let data = res.data.data;
-      dispatch(getAttentionAction(data));
+    axios.get('/mock/attention.json').then((res) => {
+      let data = res.data.data
+      dispatch(getAttentionAction(data))
     })
   }
 }

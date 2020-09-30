@@ -1,4 +1,4 @@
-import * as constants from "./constants";
+import * as constants from './constants'
 
 const navBarAction = (index) => ({
   type: constants.CHANGE_NAV_BAR,
@@ -12,12 +12,12 @@ const navShowAction = (show) => ({
 
 export const changeNavBar = (index) => {
   return (dispatch) => {
-    dispatch(navBarAction(index));
+    dispatch(navBarAction(index))
   }
 }
 
 export const changeNavBarShow = (show) => {
   return (dispatch) => {
-   dispatch(navShowAction(show));
+    dispatch(navShowAction(show))
   }
 }
